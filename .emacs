@@ -88,6 +88,9 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.twig?\\'" . web-mode))
 
+(require 'org)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
 (setq explicit-shell-file-name "/bin/bash") ;; grep doesn't work in fishsg
 (setq shell-file-name "/bin/bash") ;; grep fix
 (global-diff-hl-mode)
