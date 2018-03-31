@@ -35,40 +35,49 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+(setq explicit-shell-file-name "/bin/bash") ;; grep doesn't work in fish
+(setq shell-file-name "/bin/bash") ;; grep fix
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+
 (package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+(use-package projectile)
+(use-package magit)
+(use-package js2-mode)
+(use-package ac-php)
+(use-package diff-hl)
+(use-package web-mode)
+(use-package yaml-mode)
 
 (projectile-global-mode)
 (global-linum-mode t)
-
+(global-diff-hl-mode)
 (show-paren-mode t)
-(setq show-paren-style 'expression)
-
+  (setq show-paren-style 'expression)
 (windmove-default-keybindings)
 
-(setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")) )
-(package-initialize)
-	(unless (package-installed-p 'ac-php )
-	  (package-refresh-contents)
-	  (package-install 'ac-php )
-	  )
-	(require 'cl)
-	(require 'php-mode)
-	(add-hook 'php-mode-hook
-	          '(lambda ()
-	             (auto-complete-mode t)
-	             (require 'ac-php)
-	             (setq ac-sources  '(ac-source-php ) )
-	             (yas-global-mode 1)
-	             (ac-php-core-eldoc-setup ) ;; enable eldoc
+(require 'cl)
+(require 'php-mode)
+(add-hook 'php-mode-hook
+          '(lambda ()
+             (auto-complete-mode t)
+             (require 'ac-php)
+             (setq ac-sources  '(ac-source-php ) )
+             (yas-global-mode 1)
+             (ac-php-core-eldoc-setup ) ;; enable eldoc
 
-	             (define-key php-mode-map  (kbd "C-]") 'ac-php-find-symbol-at-point)   ;goto define
-	             (define-key php-mode-map  (kbd "C-t") 'ac-php-location-stack-back)    ;go back
-	             ))
+             (define-key php-mode-map  (kbd "C-]") 'ac-php-find-symbol-at-point)   ;goto define
+             (define-key php-mode-map  (kbd "C-t") 'ac-php-location-stack-back)    ;go back
+             ))
 
 (require 'flymake-jslint)
 (add-hook 'js2-mode-hook 'flymake-jslint-load)
@@ -90,7 +99,3 @@
 
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-
-(setq explicit-shell-file-name "/bin/bash") ;; grep doesn't work in fishsg
-(setq shell-file-name "/bin/bash") ;; grep fix
-(global-diff-hl-mode)
