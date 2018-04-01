@@ -18,7 +18,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
+    (yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
  '(projectile-globally-ignored-directories
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv")))
@@ -57,13 +57,27 @@
 (use-package diff-hl)
 (use-package web-mode)
 (use-package yaml-mode)
+(use-package flymake-jslint)
+(use-package flymake-json)
+(use-package flymake-php)
+(use-package iy-go-to-char)
+(use-package org)
+(use-package yasnippet)
+(use-package yasnippet-snippets)
+
+(global-set-key (kbd "C-c f") 'iy-go-to-char)
+(global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
+(global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
+(global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
 
 (projectile-global-mode)
-(global-linum-mode t)
 (global-diff-hl-mode)
 (show-paren-mode t)
   (setq show-paren-style 'expression)
 (windmove-default-keybindings)
+(yas-global-mode 1)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (require 'cl)
 (require 'php-mode)
@@ -79,16 +93,9 @@
              (define-key php-mode-map  (kbd "C-t") 'ac-php-location-stack-back)    ;go back
              ))
 
-(require 'flymake-jslint)
 (add-hook 'js2-mode-hook 'flymake-jslint-load)
-
-(require 'flymake-json)
 (add-hook 'json-mode 'flymake-json-load)
-
-(require 'flymake-php)
 (add-hook 'php-mode-hook 'flymake-php-load)
-
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'js2-mode-hook
           (lambda ()
             (make-local-variable 'js-indent-level)
@@ -96,6 +103,4 @@
 
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.twig?\\'" . web-mode))
-
-(require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
