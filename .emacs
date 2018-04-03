@@ -18,10 +18,11 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
+    (use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
  '(projectile-globally-ignored-directories
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv")))
+ '(require-final-newline t)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
