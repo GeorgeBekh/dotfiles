@@ -18,7 +18,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
+    (yasnippet auto-complete-config groovy-mode use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
  '(projectile-globally-ignored-directories
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv")))
@@ -54,15 +54,16 @@
 (use-package projectile)
 (use-package magit)
 (use-package js2-mode)
-(use-package ac-php)
 (use-package diff-hl)
 (use-package web-mode)
 (use-package yaml-mode)
-(use-package flymake-jslint)
 (use-package flymake-json)
 (use-package flymake-php)
 (use-package iy-go-to-char)
 (use-package org)
+(use-package auto-complete)
+(use-package ac-php)
+(use-package php-mode)
 (use-package yasnippet)
 (use-package yasnippet-snippets)
 
@@ -80,21 +81,32 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(ac-config-default)
+(global-auto-complete-mode t)
+(set-default 'ac-sources
+             '(ac-source-abbrev
+               ac-source-dictionary
+               ac-source-yasnippet
+               ac-source-words-in-buffer
+               ac-source-words-in-same-mode-buffers
+               ac-source-semantic))
+(setq ac-delay 0.5)
+
+(ac-set-trigger-key "TAB")
+(ac-set-trigger-key "<tab>")
+
 (require 'cl)
-(require 'php-mode)
 (add-hook 'php-mode-hook
           '(lambda ()
              (auto-complete-mode t)
              (require 'ac-php)
              (setq ac-sources  '(ac-source-php ) )
-             (yas-global-mode 1)
              (ac-php-core-eldoc-setup ) ;; enable eldoc
 
              (define-key php-mode-map  (kbd "C-]") 'ac-php-find-symbol-at-point)   ;goto define
              (define-key php-mode-map  (kbd "C-t") 'ac-php-location-stack-back)    ;go back
              ))
 
-(add-hook 'js2-mode-hook 'flymake-jslint-load)
 (add-hook 'json-mode 'flymake-json-load)
 (add-hook 'php-mode-hook 'flymake-php-load)
 (add-hook 'js2-mode-hook
@@ -105,3 +117,4 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.twig?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
