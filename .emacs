@@ -66,6 +66,7 @@
 (use-package php-mode)
 (use-package yasnippet)
 (use-package yasnippet-snippets)
+(use-package dockerfile-mode)
 
 (global-set-key (kbd "C-c f") 'iy-go-to-char)
 (global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
