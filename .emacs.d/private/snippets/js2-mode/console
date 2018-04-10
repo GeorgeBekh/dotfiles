@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#key : consl
+#name : console.log
+# --
+
+console.log('$1: ', $1)$0
