@@ -1,0 +1,6 @@
+# -*- mode: snippet require-final-newline: nil -*-
+#key : env
+#name : environmental variable
+# --
+
+${1:ENV$(replace-regexp-in-string "\s" "_" (upcase yas-text))}

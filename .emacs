@@ -14,11 +14,12 @@
    [default default default italic underline success warning error])
  '(custom-enabled-themes (quote (tango-dark)))
  '(indent-tabs-mode nil)
+ '(initial-buffer-choice "~/")
  '(js-indent-level 2)
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (yasnippet auto-complete-config groovy-mode use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
+    (multiple-cursors yasnippet auto-complete-config groovy-mode use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
  '(projectile-globally-ignored-directories
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv")))
@@ -67,17 +68,23 @@
 (use-package yasnippet)
 (use-package yasnippet-snippets)
 (use-package dockerfile-mode)
+(use-package multiple-cursors)
 
 (global-set-key (kbd "C-c f") 'iy-go-to-char)
 (global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
 (global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
 (global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
 
+(global-set-key (kbd "C-S-c") 'mc/edit-lines)
+
 (projectile-global-mode)
 (global-diff-hl-mode)
 (show-paren-mode t)
   (setq show-paren-style 'expression)
 (windmove-default-keybindings)
+(add-hook 'yas-minor-mode-hook
+          (lambda ()
+            (yas-activate-extra-mode 'fundamental-mode)))
 (yas-global-mode 1)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
