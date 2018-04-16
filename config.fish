@@ -1,6 +1,9 @@
 export SSH_AUTH_SOCK=/tmp/$USER.agent
 ssh-add -l > /dev/null; or ssh-add
 
+function rm
+         safe-rm $argv
+end
 function dps
         docker ps $argv
 end
