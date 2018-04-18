@@ -1,0 +1,12 @@
+# -*- mode: snippet require-final-newline: nil -*-
+#key : class
+#name : class-getters
+# --
+
+class $1 {
+
+    ${3:$$(reduce (lambda (x y) (concat x "private " y ";\n")) variables)}
+    public function __construct(${2:$$(message yas-text (setq variables (append '("") (split-string yas-text ", "))))})
+    {
+        ${4:$$(reduce (lambda (x y) (concat x "$this->" (replace-regexp-in-string (regexp-quote "$") "" y) " = " y ";\n")) variables)}}
+}

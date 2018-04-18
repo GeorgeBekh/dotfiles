@@ -19,7 +19,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (multiple-cursors yasnippet auto-complete-config groovy-mode use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
+    (iedit restclient multiple-cursors yasnippet auto-complete-config groovy-mode use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
  '(projectile-globally-ignored-directories
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv")))
@@ -69,6 +69,8 @@
 (use-package yasnippet-snippets)
 (use-package dockerfile-mode)
 (use-package multiple-cursors)
+(use-package restclient)
+(use-package iedit)
 
 (global-set-key (kbd "C-c f") 'iy-go-to-char)
 (global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
@@ -115,7 +117,7 @@
              (require 'ac-php)
              (setq ac-sources  '(ac-source-php ) )
              (ac-php-core-eldoc-setup ) ;; enable eldoc
-
+             (setq c-basic-offset 4)
              (define-key php-mode-map  (kbd "C-]") 'ac-php-find-symbol-at-point)   ;goto define
              (define-key php-mode-map  (kbd "C-t") 'ac-php-location-stack-back)    ;go back
              ))

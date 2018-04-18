@@ -1,0 +1,6 @@
+# -*- mode: snippet require-final-newline: nil -*-
+#key : vard
+#name : var_dump
+# --
+
+var_dump($1); die;
