@@ -1,6 +1,10 @@
 export SSH_AUTH_SOCK=/tmp/$USER.agent
 ssh-add -l > /dev/null; or ssh-add
 
+function fish_user_key_bindings
+         bind \cg "commandline -i '| grep '"
+end
+
 function rm
          safe-rm $argv
 end
