@@ -1,4 +1,3 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -13,13 +12,14 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes (quote (tango-dark)))
+ '(desktop-save-mode t)
  '(indent-tabs-mode nil)
  '(initial-buffer-choice "~/")
  '(js-indent-level 2)
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (iedit restclient multiple-cursors yasnippet auto-complete-config groovy-mode use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
+    (clojure-mode iedit restclient multiple-cursors yasnippet auto-complete-config groovy-mode use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
  '(projectile-globally-ignored-directories
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv")))
@@ -45,7 +45,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 
-(package-initialize)
+;;(package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -84,6 +84,8 @@
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
+(global-set-key (kbd "C-c g") 'browse-url-at-point)
+
 (projectile-global-mode)
 (global-diff-hl-mode)
 (show-paren-mode t)
@@ -99,22 +101,19 @@
 (ac-config-default)
 (global-auto-complete-mode t)
 (set-default 'ac-sources
-             '(ac-source-abbrev
-               ac-source-dictionary
-               ac-source-yasnippet
+             '(ac-source-yasnippet
                ac-source-words-in-buffer
-               ac-source-words-in-same-mode-buffers
-               ac-source-semantic))
+               ac-source-words-in-same-mode-buffers))
 (setq ac-delay 0.5)
 
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
 
-(require 'cl)
+(use-package 'cl)
 (add-hook 'php-mode-hook
           '(lambda ()
              (auto-complete-mode t)
-             (require 'ac-php)
+             (use-package 'ac-php)
              (setq ac-sources  '(ac-source-php ) )
              (ac-php-core-eldoc-setup ) ;; enable eldoc
              (setq c-basic-offset 4)
