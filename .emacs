@@ -12,14 +12,13 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes (quote (tango-dark)))
- '(desktop-save-mode t)
  '(indent-tabs-mode nil)
  '(initial-buffer-choice "~/")
  '(js-indent-level 2)
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (clojure-mode iedit restclient multiple-cursors yasnippet auto-complete-config groovy-mode use-package yasnippet-snippets iy-go-to-char flymake-php diff-hl flymake-json flymake-jslint ac-php web-mode php-mode projectile yaml-mode rjsx-mode ## flymake-csslint)))
+    (yasnippet-snippets yaml-mode web-mode use-package restclient projectile multiple-cursors magit js2-mode iy-go-to-char iedit flymake-php dockerfile-mode diff-hl ac-php)))
  '(projectile-globally-ignored-directories
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv")))
@@ -45,7 +44,6 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 
-;;(package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -58,10 +56,8 @@
 (use-package diff-hl)
 (use-package web-mode)
 (use-package yaml-mode)
-(use-package flymake-json)
 (use-package flymake-php)
 (use-package iy-go-to-char)
-(use-package org)
 (use-package auto-complete)
 (use-package ac-php)
 (use-package php-mode)
@@ -72,10 +68,9 @@
 (use-package restclient)
 (use-package iedit)
 
-(global-set-key (kbd "C-c f") 'iy-go-to-char)
-(global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
-(global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
-(global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
+(global-set-key (kbd "M-i") 'back-to-indentation)
+(global-set-key (kbd "M-m") 'iy-go-to-char)
+(global-set-key (kbd "M-M") 'iy-go-to-char-backward)
 
 (global-set-key (kbd "C-S-c") 'mc/edit-lines)
 
@@ -89,12 +84,13 @@
 (projectile-global-mode)
 (global-diff-hl-mode)
 (show-paren-mode t)
-  (setq show-paren-style 'expression)
+(setq show-paren-style 'expression)
 (windmove-default-keybindings)
+
+(yas-global-mode 1)
 (add-hook 'yas-minor-mode-hook
           (lambda ()
             (yas-activate-extra-mode 'fundamental-mode)))
-(yas-global-mode 1)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -109,11 +105,10 @@
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
 
-(use-package 'cl)
 (add-hook 'php-mode-hook
           '(lambda ()
              (auto-complete-mode t)
-             (use-package 'ac-php)
+             (use-package ac-php)
              (setq ac-sources  '(ac-source-php ) )
              (ac-php-core-eldoc-setup ) ;; enable eldoc
              (setq c-basic-offset 4)
@@ -121,7 +116,6 @@
              (define-key php-mode-map  (kbd "C-t") 'ac-php-location-stack-back)    ;go back
              ))
 
-(add-hook 'json-mode 'flymake-json-load)
 (add-hook 'php-mode-hook 'flymake-php-load)
 (add-hook 'js2-mode-hook
           (lambda ()
