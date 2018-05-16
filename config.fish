@@ -2,7 +2,7 @@ export SSH_AUTH_SOCK=/tmp/$USER.agent
 ssh-add -l > /dev/null; or ssh-add
 
 function fish_user_key_bindings
-         bind \cg "commandline -i ' | grep -i -- \"'; commandline -a '\"'"
+         bind \cg "commandline -i ' | grep -i -C 5 -- \"'; commandline -a '\"'"
          bind \ch "commandline -i ' --help'"
 end
 
@@ -53,23 +53,23 @@ function node
 	    node:8.9-alpine $argv
 end
 
-function clojure
-	docker run \
-	    --rm \
-	    -i \
-	    -u (id -u)":"(id -g) \
-	    -v (pwd):/app \
-            -e HOME=/tmp \
-	    -w /app \
-	    --name fish-clojure \
-	    clojure:lein-alpine $argv
-end
-
 function emacs
 	 env emacs $argv -nw
 end
 
 function mkcdir
-    mkdir -p "$argv[1]" ;
-    cd "$argv[1]"
+         mkdir -p "$argv[1]" ;
+         cd "$argv[1]"
+end
+
+function rnd
+         head /dev/urandom | base64 | tr -d \n | cut -c 50-100
+end
+
+function backup
+         cp "$argv[1]" "$argv[1].old"
+end
+
+function fish_title #emacs fix
+         true
 end

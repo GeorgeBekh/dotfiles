@@ -1,0 +1,9 @@
+# -*- mode: snippet require-final-newline: nil -*-
+#key : GET
+#name : get-request
+# --
+
+#
+GET ${2:http}://${2:localhost}$3/$0
+
+#

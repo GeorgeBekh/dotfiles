@@ -18,10 +18,12 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (yasnippet-snippets yaml-mode web-mode use-package restclient projectile multiple-cursors magit js2-mode iy-go-to-char iedit flymake-php dockerfile-mode diff-hl ac-php)))
+    (clojure-mode yasnippet-snippets yaml-mode web-mode use-package restclient projectile multiple-cursors magit js2-mode iy-go-to-char iedit flymake-php dockerfile-mode diff-hl ac-php)))
  '(projectile-globally-ignored-directories
    (quote
-    (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv")))
+    (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv" "node_modules")))
+;; '(projectile-globally-ignored-files
+;;   (append '(".dist" ".min") projectile-globally-ignored-files))
  '(require-final-newline t)
  '(show-paren-mode t)
  '(tool-bar-mode nil))

@@ -1,0 +1,11 @@
+# -*- mode: snippet require-final-newline: nil -*-
+#key : POST
+#name : post-request
+# --
+
+#
+POST ${2:http}://${1:localhost}$3/$0
+Content-Type: application/json
+
+{}
+#
