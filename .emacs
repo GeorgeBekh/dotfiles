@@ -18,12 +18,10 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (clojure-mode yasnippet-snippets yaml-mode web-mode use-package restclient projectile multiple-cursors magit js2-mode iy-go-to-char iedit flymake-php dockerfile-mode diff-hl ac-php)))
+    (groovy-mode clojure-mode yasnippet-snippets yaml-mode web-mode use-package restclient projectile multiple-cursors magit js2-mode iy-go-to-char iedit flymake-php dockerfile-mode diff-hl ac-php)))
  '(projectile-globally-ignored-directories
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "venv" "node_modules")))
-;; '(projectile-globally-ignored-files
-;;   (append '(".dist" ".min") projectile-globally-ignored-files))
  '(require-final-newline t)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -40,6 +38,7 @@
       `((".*" ,temporary-file-directory t)))
 (setq explicit-shell-file-name "/bin/bash") ;; grep doesn't work in fish
 (setq shell-file-name "/bin/bash") ;; grep fix
+(setq confirm-kill-emacs 'y-or-n-p)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
