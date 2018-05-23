@@ -32,6 +32,8 @@
  ;; If there is more than one, they won't work right.
  )
 
+(setq default-input-method "cyrillic-yawerty")
+
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
