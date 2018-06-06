@@ -84,6 +84,19 @@
 
 (global-set-key (kbd "C-c g") 'browse-url-at-point)
 
+(global-set-key (kbd "M-G") 'magit-status)
+
+(defun duplicate-line()
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (open-line 1)
+  (next-line 1)
+  (yank))
+
+(global-set-key (kbd "\C-c\C-d") 'duplicate-line)
+
 (projectile-global-mode)
 (global-diff-hl-mode)
 (show-paren-mode t)
